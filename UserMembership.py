@@ -1,4 +1,4 @@
-# This script shows how to use the group or applicationRoles assigned to users in Jira.
+# This script shows how to get groups or applicationRoles assigned to users in Jira.
 
 import getpass
 from jira import JIRA

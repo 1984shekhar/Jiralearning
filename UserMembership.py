@@ -1,5 +1,5 @@
-# This script shows how to use the client in anonymous mode
-# against jira.atlassian.com.
+# This script shows how to use the group or applicationRoles assigned to users in Jira.
+
 import getpass
 from jira import JIRA
 class UserMembership:

@@ -24,7 +24,7 @@ class UserMembership:
     appRole = jirauser.applicationRoles
     appRoleSize = jirauser.applicationRoles.size
     appRole_list = list()
-    for x in range(appRoleSize):
+    for y in range(appRoleSize):
        appRole_list.append(appRole.items[x].name)
     user_all_appRole = ",".join(group_list)
 

@@ -29,10 +29,10 @@ def insert_vendor_list(vendor_list):
 for x in range(200):
     counter = str(x);
     insert_vendor_list([
-        (counter+'AKM Semiconductor Inc.',),
-        (counter+'Asahi Glass Co Ltd.',),
-        (counter+'Daikin Industries Ltd.',),
-        (counter+'Dynacast International Inc.',),
-        (counter+'Foster Electric Co. Ltd.',)
+        (counter+' Tata Consultancy Services',),
+        (counter+' Infosys Pvt Ltd',),
+        (counter+' Tech Mahindra Pvt Ltd',),
+        (counter+' Flipkart',),
+        (counter+' Zomato',)
     ])
     #time.sleep(1)   

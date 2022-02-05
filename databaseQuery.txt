@@ -1,6 +1,39 @@
-[postgresql]
-host = localhost
-database = testdb
-user = testuser
-password = testuser
-port = 5432
+#Index 
+CREATE INDEX vendors_name_index ON vendors(vendor_name);
+#performance
+EXPLAIN ANALYSE select * from vendors where vendor_name = '157 Infosys Pvt Ltd';
+# drop index
+drop index vendors_name_index;
+
+#check table create sql query
+cpandey@cpandey:~$ sudo su - postgres
+[sudo] password for cpandey: 
+postgres@cpandey:~$ psql
+psql (14.0 (Ubuntu 14.0-1.pgdg21.04+1), server 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1))
+Type "help" for help.
+postgres@cpandey:~$ pg_dump testdb -t vendors --schema-only
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
+-- Dumped by pg_dump version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
+
+CREATE TABLE public.vendors (
+    vendor_id integer NOT NULL,
+    vendor_name character varying(255) NOT NULL
+);
+
+postgres=# \c testdb
+psql (14.0 (Ubuntu 14.0-1.pgdg21.04+1), server 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1))
+You are now connected to database "testdb" as user "postgres".
+testdb=# \d vendors;
+testdb=# 
+
+                                          Table "public.vendors"
+   Column    |          Type          | Collation | Nullable |                  Default                   
+-------------+------------------------+-----------+----------+--------------------------------------------
+ vendor_id   | integer                |           | not null | nextval('vendors_vendor_id_seq'::regclass)
+ vendor_name | character varying(255) |           | not null | 
+Indexes:
+    "vendors_pkey" PRIMARY KEY, btree (vendor_id)

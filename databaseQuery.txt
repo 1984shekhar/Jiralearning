@@ -1,7 +1,7 @@
 #Index 
 CREATE INDEX vendors_name_index ON vendors(vendor_name);
 #performance
-EXPLAIN ANALYSE select * from vendors where vendor_name = '157 Infosys Pvt Ltd';
+EXPLAIN ANALYSE select * from vendors where vendor_name = 'some vendor';
 # drop index
 drop index vendors_name_index;
 

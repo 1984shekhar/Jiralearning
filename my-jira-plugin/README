@@ -1,7 +1,7 @@
 You have successfully created an Atlassian Plugin!
 
 Here are the SDK commands you'll use immediately:
-
+* atlas-mvn package -- This will create jar and obr, which can be delpoyed in Jira DC.
 * atlas-run   -- installs this plugin into the product and starts it on localhost
 * atlas-debug -- same as atlas-run, but allows a debugger to attach at port 5005
 * atlas-help  -- prints description for all commands in the SDK

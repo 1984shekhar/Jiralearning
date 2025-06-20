@@ -1,0 +1,24 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <startup>late</startup>
+        <!-- Required imports -->
+        <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+        <component-import key="pluginEventManager" interface="com.atlassian.plugin.event.PluginEventManager"/>
+    </plugin-info>
+
+    <!-- Add a web item to the Jira top navigation bar -->
+    <web-item key="hello-world-link" name="Hello World Link" section="system.top.navigation.bar" weight="100">
+        <description>A Hello World link</description>
+        <label>Hello World</label>
+        <link linkId="hello-world-link">/plugins/servlet/hello-world</link>
+    </web-item>
+
+    <!-- Define a servlet to handle the link action -->
+    <servlet key="hello-world-servlet" name="Hello World Servlet" class="com.example.plugins.myjiraplugin.HelloWorldServlet">
+        <description>A simple servlet to return Hello World</description>
+        <url-pattern>/hello-world</url-pattern>
+    </servlet>
+</atlassian-plugin>

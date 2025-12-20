@@ -1,0 +1,34 @@
+modules:
+  jira:issuePanel:
+    - key: remoterequestexample-hello-world-issue-panel
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: remoteRequestExample
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+  function:
+    - key: resolver
+      handler: index.handler
+
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
+  external:
+    fetch:
+      backend:
+        - address: jsonplaceholder.typicode.com
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+
+remotes:
+    - key: my-remote-key
+      baseUrl: https://jsonplaceholder.typicode.com
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/58387112-ce72-4623-a521-50283552fff7

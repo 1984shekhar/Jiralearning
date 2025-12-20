@@ -1,0 +1,65 @@
+modules:
+  jira:issuePanel:
+    - key: custom-entity-batch-set-example-app-issue-panel
+      resource: main
+      resolver:
+        function: resolver
+      title: custom_entity_batch_set_example_app
+      icon: https://www.atlassian.com/favicon.ico
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/hello-world/build
+app:
+  storage:
+    entities:
+      - name: tsp_dc_cloud_migration_project
+        attributes:
+          migrationId:
+            type: string
+          transferId:
+            type: string
+          s3Key:
+            type: string
+          projectId:
+            type: string
+          projectStatus:
+            type: string
+          result:
+            type: string
+        indexes:
+          - name: by-migration-and-transferId-per-projectStatus
+            range:
+              - projectStatus
+            partition:
+              - migrationId
+              - transferId
+      - name: tsp_dc_cloud_migration_log
+        attributes:
+          migrationId:
+            type: string
+          transferId:
+            type: string
+          message:
+            type: string
+          level:
+            type: string
+          timestamp:
+            type: integer
+        indexes:
+          - name: by-migration-and-transferId-per-logLevel
+            range:
+              - level
+            partition:
+              - migrationId
+              - transferId
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/06ef4927-8a2b-4241-880b-5624d1eec614
+permissions:
+  scopes:
+    - storage:app

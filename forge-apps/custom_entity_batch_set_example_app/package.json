@@ -1,0 +1,14 @@
+{
+  "name": "jira-admin-page-custom-ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "@forge/kvs": "^1.0.7",
+    "@forge/resolver": "1.7.1"
+  }
+}

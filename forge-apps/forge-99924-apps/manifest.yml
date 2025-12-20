@@ -1,0 +1,87 @@
+# modules:
+  # jira:issuePanel:
+  #   - key: approval-use-case-1-hello-world-issue-panel
+  #     resource: main
+  #     resolver:
+  #       function: resolver
+  #     render: native
+  #     title: Approval Use Case 1
+  #     icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+#   function:
+#     - key: resolver
+#       handler: index.handler
+# resources:
+#   - key: main
+#     path: src/frontend/index.jsx
+# app:
+#   runtime:
+#     name: nodejs22.x
+#     memoryMB: 256
+#     architecture: arm64
+#   id: ari:cloud:ecosystem::app/0eeec209-3140-4f12-81b7-ece1ac84e81f
+# permissions:
+#   scopes:
+#     - read:jira-work
+#     - write:jira-work
+# modules:
+#   jira:issuePanel:
+#     - key: worklog-approvals-issue-panel
+#       resource: main-ui
+#       resolver:
+#         function: resolver
+#       title: Approval Use Case 1
+#       icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+#   function:
+#     - key: resolver
+#       handler: src/resolvers/index.js
+# resources:
+#   - key: main-ui         # <-- must match the resource above
+#     path: src/frontend
+modules:
+  jira:issuePanel:
+    - key: worklog-approvals-issue-panel
+      resource: main-ui
+      resolver:
+        function: resolver
+      title: Approval Use Case 1
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+
+  function:
+    - key: resolver
+      handler: index.handler
+
+resources:
+  - key: main-ui
+    path: src/frontend
+
+permissions:
+  scopes:
+    - storage:app
+    - read:jira-work
+    - write:jira-work
+
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/f5c25e7e-6dce-4274-b1f5-add7cbe94295
+
+# permissions:
+#   scopes:
+#     # Storage and core Jira data
+#     - storage:app
+#     - read:jira-work
+#     - write:jira-work
+#     - read:jira-user
+#     # If your site uses granular worklog scopes, include these as needed:
+#     # - read:worklog:jira
+#     # - write:worklog:jira
+#     # Optional if you send in-product notifications via APIs:
+#     # - send:notification:jira
+#     # - read:notification:jira
+#   # If you call external services (email/Slack relays), define:
+#   # external:
+#   #   fetch:
+#   #     client:
+#   #       - https://hooks.slack.com

@@ -1,0 +1,30 @@
+modules:
+  jira:workflowPostFunction:
+    - key: suggest-a-cocktail
+      name: Suggest a cocktail
+      description: Suggest a suitable cocktail based on the severity of the incident.
+      function: postfunction
+  jira:workflowValidator:
+    - key: wip-limit
+      name: Limit Work In Progress
+      description: Prevent transition if it will exceed WIP limits.
+      function: validate
+  jira:workflowCondition:
+    - key: summary-is-story
+      name: Summary is a story
+      description: Test if the summary is a well-formed user story.
+      expression: issue.summary.match('As a .*, I want to .*, so that .*') != null
+  function:
+    - key: postfunction
+      handler: index.postfunction
+    - key: validate
+      handler: index.validate
+permissions:
+  scopes:
+    - manage:jira-configuration
+    - read:jira-work
+    - write:jira-work
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/c449af9a-94ea-4377-a546-18f75ddea990

@@ -1,0 +1,11 @@
+forge webtrigger list
+
+% curl -X GET "<url>" \   
+  -w "\nStatus: %{http_code}\n"
+{"message":"GET request successful","timestamp":"2026-01-25T17:54:27.065Z"}
+Status: 200
+cpandey@F3W1K603FQ TestWebTrigger % curl -X POST "<url>" \  
+  -H "Content-Type: application/json" \
+  -d '{"test": "data"}' -w "\nStatus: %{http_code}\n"
+{"message":"POST request successful","receivedData":{"test":"data"},"timestamp":"2026-01-25T17:54:50.260Z"}
+Status: 200

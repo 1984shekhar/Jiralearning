@@ -1,0 +1,21 @@
+# Web Trigger Example App
+# Demonstrates handling GET and POST requests via web triggers
+
+modules:
+  webtrigger:
+    - key: example
+      function: my-function
+  function:
+    - key: my-function
+      handler: index.myfunction
+  
+resources:
+  - key: main
+    path: src/frontend
+
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/7543308a-c84e-4cc9-9a67-8a429563881f

@@ -1,0 +1,26 @@
+modules:
+  jira:issuePanel:
+    - key: permission-check-hello-world-issue-panel
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: permission-check
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+permissions:
+  scopes:
+    - read:jira-user
+    - read:jira-work
+    - write:jira-work
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/ce142dcf-24b7-4d9c-be3f-7a2d0404e883

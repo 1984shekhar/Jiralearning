@@ -1,0 +1,38 @@
+modules:
+  jira:customFieldType:
+    - key: forge-simple-dropdown-enum-custom-field-type-ui-kit-2-hello-world
+      name: forge-simple-dropdown-enum
+      description: A hello world custom field.
+      type: string
+      view:
+        render: native
+        resource: main
+        experience:
+          - issue-view
+          - portal-view
+      edit:
+        resource: edit
+        render: native
+        isInline: true
+        experience:
+          - issue-create
+          - issue-transition
+          - issue-view
+          - portal-request
+      contextConfig:
+        resource: config
+        layout: basic
+        render: native
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+  - key: edit
+    path: src/frontend/edit.jsx
+  - key: config
+    path: src/frontend/context-config.jsx
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/f4c6e375-ee48-45ed-8b81-44d56b4c5f7e

@@ -1,0 +1,31 @@
+modules:
+  jira:issuePanel:
+    - key: create-version-event-hello-world-issue-panel
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: create-version-event
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+  trigger:
+    - key: version-created-trigger
+      function: versionCreated
+      events:
+        - avi:jira:created:version
+  function:
+    - key: versionCreated
+      handler: index.versionCreated
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/212a52a3-ae57-4acb-99b9-4419dfc3d382
+permissions:
+  scopes:
+    - read:jira-work

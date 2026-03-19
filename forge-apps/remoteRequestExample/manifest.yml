@@ -19,13 +19,14 @@ permissions:
     fetch:
       backend:
         - address: jsonplaceholder.typicode.com
+        - remote: my-remote-key
 resources:
   - key: main
     path: src/frontend/index.jsx
 
 remotes:
     - key: my-remote-key
-      baseUrl: https://jsonplaceholder.typicode.com
+      baseUrl: https://jsonplaceholder.typicode.com//todos/1
 app:
   runtime:
     name: nodejs22.x

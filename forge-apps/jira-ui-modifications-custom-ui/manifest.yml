@@ -1,0 +1,29 @@
+modules:
+  jira:uiModifications:
+    - key: uim-simple-template-hello-world-ui-modifications
+      title: uim-simple-template
+      resource: uiModificationsMain
+  trigger:
+    - key: uim-simple-template-hello-world-ui-modifications-install
+      function: main
+      events:
+        - avi:forge:installed:app
+  function:
+    - key: main
+      handler: index.run
+resources:
+  - key: uiModificationsMain
+    path: static/hello-world/build
+permissions:
+  scopes:
+    - manage:jira-configuration
+    - read:jira-user
+    - read:jira-work
+    - write:jira-work
+
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/a83f29e2-83b2-43e7-a286-8fdbf103d0b9

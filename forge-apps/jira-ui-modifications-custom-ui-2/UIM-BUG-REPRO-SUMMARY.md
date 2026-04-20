@@ -7,7 +7,7 @@
 
 ## 1. Background
 
-A partner (Deviniti) reported that Atlassian's **UI Modifications (UIM)** module rejects ADF (Atlassian Document Format) payloads containing certain node types when set via `setValue()` on issue fields (e.g. description) during issue creation.
+A partner   reported that Atlassian's **UI Modifications (UIM)** module rejects ADF (Atlassian Document Format) payloads containing certain node types when set via `setValue()` on issue fields (e.g. description) during issue creation.
 
 These node types are **fully valid ADF**, generated and stored by Jira itself without any issues — but UIM's validation layer throws an `INVALID_INPUT` error when the same content is passed back via `setValue()`.
 
@@ -42,12 +42,12 @@ The following ADF nodes cause UIM to fail with `INVALID_INPUT` when set via `set
 
 ---
 
-## 4. The Partner's Scenario (Deviniti Issue Templates)
+## 4. The Partner's Scenario (" " Issue Templates)
 
-**Reference:** https://deviniti.com/support/addon/cloud/issue-templates/latest/dynamic-variables/
+**Reference:** https://" ".com/support/addon/cloud/issue-templates/latest/dynamic-variables/
 
-### Steps to reproduce (with Deviniti app):
-1. Create a template in the Deviniti Issue Templates app containing problematic nodes (`expand`, `codeBlock`, `taskList`, `decisionList`)
+### Steps to reproduce (with " " app):
+1. Create a template in the " " Issue Templates app containing problematic nodes (`expand`, `codeBlock`, `taskList`, `decisionList`)
 2. Open the Global Issue Create (GIC) dialog in Jira
 3. Apply the created template — Jira pre-fills the description field with the template content
 4. Fill in dynamic variable values in the modal and confirm
@@ -73,7 +73,7 @@ The `jira-ui-modifications-custom-ui` Forge app was built to replicate this bug.
 
 ### `onInit` handler (fires when GIC opens):
 1. Calls `getValue()` on the description field
-2. If the field has real content (from a Deviniti template) → uses it directly
+2. If the field has real content (from a " " template) → uses it directly
 3. If the field is empty → falls back to a **simulated ADF** with all problematic nodes
 4. Appends a dynamic variable paragraph to the ADF
 5. Calls `setValue()` with the combined ADF
@@ -97,7 +97,7 @@ The `jira-ui-modifications-custom-ui` Forge app was built to replicate this bug.
 
 ## 6. What "Simulated ADF" Means
 
-Since the Deviniti Issue Templates app is not installed on our test Jira site, the description field is **empty** when GIC opens. There is no real template content to read.
+Since the " " Issue Templates app is not installed on our test Jira site, the description field is **empty** when GIC opens. There is no real template content to read.
 
 So the app **simulates** what a real Jira template would produce by hardcoding an ADF document in the `buildTemplateAdfWithProblematicNodes()` function:
 
@@ -115,7 +115,7 @@ So the app **simulates** what a real Jira template would produce by hardcoding a
 }
 ```
 
-This is a **fake/fallback** — used only when the field is empty. When a real Deviniti template is applied, the app uses the real `getValue()` result instead.
+This is a **fake/fallback** — used only when the field is empty. When a real " " template is applied, the app uses the real `getValue()` result instead.
 
 ---
 
@@ -123,8 +123,8 @@ This is a **fake/fallback** — used only when the field is empty. When a real D
 
 | Run | `getValue()` result | ADF used | `setValue()` result |
 |---|---|---|---|
-| Without Deviniti app | Empty doc `{}` | Simulated (fallback) | ✅ ACCEPTED |
-| With Deviniti app (expected) | Real template ADF | Real `getValue()` result | ❌ INVALID_INPUT (bug) |
+| Without " " app | Empty doc `{}` | Simulated (fallback) | ✅ ACCEPTED |
+| With " " app (expected) | Real template ADF | Real `getValue()` result | ❌ INVALID_INPUT (bug) |
 
 ### Why the bug didn't trigger in our environment:
 - The field was empty → we used our hand-crafted simulated ADF
@@ -135,7 +135,7 @@ This is a **fake/fallback** — used only when the field is empty. When a real D
 
 ## 8. Whose Bug Is It?
 
-### ❌ NOT Deviniti's bug
+### ❌ NOT " "'s bug
 - They use fully valid ADF node types (part of the official Atlassian Document Format schema)
 - Jira itself accepts, stores, and renders these nodes without any issues
 - `getValue()` returns these nodes — so Jira considers them valid
@@ -149,24 +149,24 @@ This is a **fake/fallback** — used only when the field is empty. When a real D
 
 ## 9. How the App Works With Partner's Template
 
-The app is **already ready** to work with the partner's Deviniti template — no code changes needed:
+The app is **already ready** to work with the partner's " " template — no code changes needed:
 
 ```javascript
 // Automatically switches between real and simulated ADF:
 let existingAdf = descriptionField.getValue();
 
 if (isFieldEmpty) {
-  // Without Deviniti app → uses simulated ADF
+  // Without " " app → uses simulated ADF
   existingAdf = buildTemplateAdfWithProblematicNodes();
 } else {
-  // With Deviniti app → uses real template ADF ✅
+  // With " " app → uses real template ADF ✅
   // setValue() will then trigger INVALID_INPUT
 }
 ```
 
 ### Steps for partner to reproduce with this app:
-1. Deploy this Forge app on their Jira site (where Deviniti app is installed)
-2. Create a template in Deviniti app with `expand`, `codeBlock`, `taskList`, `decisionList` nodes
+1. Deploy this Forge app on their Jira site (where " " app is installed)
+2. Create a template in " " app with `expand`, `codeBlock`, `taskList`, `decisionList` nodes
 3. Open GIC → apply the template
 4. Observe the ❌ red panel in the app iframe and `INVALID_INPUT` errors in the console
 
@@ -193,7 +193,7 @@ if (isFieldEmpty) {
 | **`setValue()`** | UIM API to set the value of a field |
 | **`INVALID_INPUT`** | Error thrown by UIM when it rejects an ADF payload |
 | **Dynamic Variables** | Placeholders like `{{reporter}}`, `{{date}}` resolved at runtime |
-| **Template** | Pre-defined issue content (from Deviniti app) applied to GIC |
+| **Template** | Pre-defined issue content (from " " app) applied to GIC |
 | **Simulated ADF** | Hardcoded ADF in our app, mimicking what a real template produces |
 | **onInit** | UIM handler that fires when the issue create dialog opens |
 | **onChange** | UIM handler that fires when a watched field value changes |

@@ -27,7 +27,7 @@ const { onInit, onChange } = uiModificationsApi;
  *   - taskItem         (individual checkbox element)
  *   - codeBlock        (non-inline code blocks)
  *
- * Reference: https://deviniti.com/support/addon/cloud/issue-templates/latest/dynamic-variables/
+ *
  */
 
 // ---------------------------------------------------------------------------

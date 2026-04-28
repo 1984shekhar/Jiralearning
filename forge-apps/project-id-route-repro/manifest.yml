@@ -1,0 +1,23 @@
+modules:
+  jira:projectPage:
+    - key: project-id-route-repro-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Project ID Route Repro
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+permissions:
+  scopes:
+    - read:jira-work
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/3e1a0e51-d3ab-45aa-ac87-defb3eb858ff

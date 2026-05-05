@@ -1,0 +1,51 @@
+modules:
+  confluence:globalPage:
+    - key: custom-content-anon-repro-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Custom Content Anonymous Repro
+      route: custom-content-anon-repro
+      unlicensedAccess:
+        - anonymous
+  confluence:customContent:
+    - key: custom-content-anon-repro-content
+      title: Anonymous Repro Custom Content
+      description: Minimal reproducer for anonymous access limitations with supportedSpacePermissions.
+      bodyType: raw
+      resource: main
+      render: native
+      resolver:
+        function: resolver
+      supportedContainerTypes:
+        - space
+      supportedChildTypes:
+        - attachment
+      supportedSpacePermissions:
+        - read
+        - create
+        - delete
+      unlicensedAccess:
+        - anonymous
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+
+permissions:
+  scopes:
+    - read:confluence-content.summary
+    - read:confluence-space.summary
+    - read:custom-content:confluence
+    - read:space:confluence
+    - write:custom-content:confluence
+
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/1c63073f-52da-4f0c-8676-8af85d3ffd71

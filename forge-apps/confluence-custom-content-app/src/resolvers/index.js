@@ -114,7 +114,7 @@ resolver.define('createReproContent', async (req) => {
     spaceId,
     body: {
       representation: 'storage',
-      value: `<p>Anonymous custom content repro created at ${new Date().toISOString()}</p><p>Issue: ECOHELP-129073</p><p>Type: ${customContentType}</p>`,
+      value: `<p>Anonymous custom content repro created at ${new Date().toISOString()}</p><p>Type: ${customContentType}</p>`,
     },
   };
 

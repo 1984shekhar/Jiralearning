@@ -1,0 +1,9 @@
+{
+  "name": "rovo-context-reproducer",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@forge/bridge": "5.12.0"
+  }
+}

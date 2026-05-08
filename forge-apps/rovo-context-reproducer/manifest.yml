@@ -1,0 +1,48 @@
+modules:
+  confluence:globalPage:
+    - key: rovo-context-global-page
+      title: Rovo Context Reproducer
+      route: rovo-context-reproducer
+      resource: main
+  confluence:spacePage:
+    - key: rovo-context-space-page
+      title: Rovo Context Reproducer
+      route: rovo-context-reproducer
+      resource: main
+  rovo:agent:
+    - key: rovo-context-agent
+      name: Rovo Context Reproducer
+      description: Reproduces missing action context for Confluence global and space pages.
+      prompt: >
+        You help test Rovo action context propagation in Confluence. When the
+        user asks to inspect, debug, check, or log context, call the
+        inspect-context action.
+      conversationStarters:
+        - Inspect action context
+        - Log current context
+      actions:
+        - inspect-context
+  action:
+    - key: inspect-context
+      name: Inspect context
+      function: inspectContext
+      actionVerb: TRIGGER
+      description: Logs the payload received by the Rovo action.
+      inputs:
+        note:
+          title: Note
+          type: string
+          required: false
+          description: Optional note to help identify the test run.
+  function:
+    - key: resolver
+      handler: index.resolver
+    - key: inspectContext
+      handler: index.inspectContext
+resources:
+  - key: main
+    path: static/simple
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/a136854a-6d34-43d0-9b73-cd28588bbfca

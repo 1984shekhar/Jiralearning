@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rovo Context Reproducer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 24px;
+        line-height: 1.5;
+      }
+      code {
+        background: #f4f5f7;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      pre {
+        background: #f7f8f9;
+        border: 1px solid #dfe1e6;
+        border-radius: 8px;
+        padding: 12px;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .label {
+        font-weight: 600;
+        margin-top: 16px;
+      }
+      .error {
+        color: #ae2e24;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rovo Context Reproducer</h1>
+    <p>Use this page to compare client-side page context against the server-side Rovo action payload.</p>
+    <ol>
+      <li>Open this page and wait for the client-side context to load below.</li>
+      <li>Open the Rovo agent from this page.</li>
+      <li>Ask it to <code>Inspect context</code>.</li>
+      <li>Check <code>forge logs</code> for the action summary and compare it with the page context shown here.</li>
+      <li>Repeat from the global page and the space page, then compare differences.</li>
+    </ol>
+
+    <div class="label">Client-side extension context summary</div>
+    <pre id="summary">Loading…</pre>
+
+    <div class="label">Full client-side extension context</div>
+    <pre id="full-context">Loading…</pre>
+
+    <script type="module">
+      import { view } from 'https://unpkg.com/@forge/bridge@5.12.0/out/bridge.esm.js';
+
+      const summaryEl = document.getElementById('summary');
+      const fullContextEl = document.getElementById('full-context');
+
+      const pickSummary = (context) => ({
+        localId: context?.localId ?? null,
+        moduleKey: context?.moduleKey ?? null,
+        extensionKey: context?.extension?.key ?? null,
+        extensionType: context?.extension?.type ?? null,
+        location: context?.location ?? null,
+        product: context?.product ?? null,
+        siteUrl: context?.siteUrl ?? null,
+        contentId: context?.extension?.content?.id ?? context?.contentId ?? null,
+        spaceKey: context?.extension?.space?.key ?? context?.spaceKey ?? null,
+        spaceId: context?.extension?.space?.id ?? context?.spaceId ?? null
+      });
+
+      const renderJson = (element, value) => {
+        element.textContent = JSON.stringify(value, null, 2);
+      };
+
+      try {
+        const context = await view.getContext();
+        renderJson(summaryEl, pickSummary(context));
+        renderJson(fullContextEl, context);
+        console.log('=== CLIENT PAGE CONTEXT SUMMARY START ===');
+        console.log(JSON.stringify(pickSummary(context), null, 2));
+        console.log('=== CLIENT PAGE CONTEXT SUMMARY END ===');
+        console.log('=== CLIENT PAGE FULL CONTEXT START ===');
+        console.log(JSON.stringify(context, null, 2));
+        console.log('=== CLIENT PAGE FULL CONTEXT END ===');
+      } catch (error) {
+        summaryEl.textContent = `Failed to load client-side context: ${error.message}`;
+        fullContextEl.textContent = error.stack || error.message;
+        summaryEl.classList.add('error');
+        fullContextEl.classList.add('error');
+        console.error('Failed to load Forge bridge context', error);
+      }
+    </script>
+  </body>
+</html>

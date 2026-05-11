@@ -1,0 +1,30 @@
+modules:
+  jira:customFieldType:
+    - key: dynamic-text-field
+      name: Dynamic text field
+      description: A simple Forge dynamic custom field example.
+      type: string
+      resolver:
+        function: resolver
+      view:
+        resource: view
+        render: native
+        experience:
+          - issue-view
+      contextConfig:
+        resource: config
+        render: native
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: view
+    path: src/frontend/view.jsx
+  - key: config
+    path: src/frontend/context-config.jsx
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/1b363aeb-c56e-41eb-83e4-d61742afa92a

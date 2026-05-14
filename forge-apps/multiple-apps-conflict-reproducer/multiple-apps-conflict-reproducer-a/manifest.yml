@@ -1,0 +1,29 @@
+modules:
+  jira:uiModifications:
+    - key: multiple-apps-conflict-ui-modifications-a
+      title: Multiple Apps Conflict Reproducer A
+      resource: uiModificationsMain
+  trigger:
+    - key: multiple-apps-conflict-install-trigger-a
+      function: main
+      events:
+        - avi:forge:installed:app
+        - avi:forge:updated:app
+  function:
+    - key: main
+      handler: index.run
+resources:
+  - key: uiModificationsMain
+    path: static/hello-world/build
+permissions:
+  scopes:
+    - read:jira-user
+    - read:jira-work
+    - manage:jira-configuration
+    - write:jira-work
+    - manage:jira-project
+
+app:
+  runtime:
+    name: nodejs24.x
+  id: ari:cloud:ecosystem::app/d2077fe4-26a0-468f-9dba-5ebd92771e27

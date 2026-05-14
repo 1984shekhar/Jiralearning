@@ -1,0 +1,15 @@
+{
+  "name": "multiple-apps-conflict-reproducer",
+  "version": "1.0.0",
+  "description": "Forge Jira UI Modifications reproducer for MULTIPLE_APPS_CONFLICT",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@forge/api": "^7.1.2",
+    "build": "^0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}

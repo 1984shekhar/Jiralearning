@@ -1,0 +1,19 @@
+License testing note
+
+If `app.licensing.enabled` is set to `true`, install the app in the development environment when simulating license functionality.
+
+Development testing commands:
+- `forge deploy -e development`
+- `forge install -e development --license active`
+- `forge install -e development --license trial`
+
+If `app.licensing.enabled` is set to `false`, install the app in the production environment as a normal unlicensed app.
+
+Production testing commands:
+- `forge deploy -e production`
+- `forge install -e production`
+- `forge install -e production --upgrade`
+
+This setup is only for testing purpose.
+
+License simulation flags like `--license active` or `--license trial` are supported only in the development environment for this test flow and are not supported in the production environment.

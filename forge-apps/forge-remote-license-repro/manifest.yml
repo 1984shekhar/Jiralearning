@@ -1,0 +1,38 @@
+modules:
+  jira:globalPage:
+    - key: remote-license-repro-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Forge Remote License Repro
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+
+permissions:
+  scopes:
+    - read:app-system-token
+    - read:app-user-token
+    - read:jira-work
+
+remotes:
+  - key: license-inspector
+    baseUrl: https://anthropology-boost-circumstances-working.trycloudflare.com
+    auth:
+      appSystemToken:
+        enabled: true
+      appUserToken:
+        enabled: true
+    operations:
+      - compute
+
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/49d4d372-ecac-4c65-a4d5-8985054c1002
+  licensing:
+    enabled: false

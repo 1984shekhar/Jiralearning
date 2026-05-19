@@ -1,0 +1,16 @@
+app:
+  id: ari:cloud:ecosystem::app/50f3726f-9005-45fb-9604-834061996a6b
+  runtime:
+    name: nodejs22.x
+
+modules:
+  function:
+    - key: logger
+      handler: index.run
+
+  webtrigger:
+    - key: log-webtrigger
+      function: logger
+
+permissions:
+  scopes: []

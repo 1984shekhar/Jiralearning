@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forge Remote License Repro</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px; }
+      button { padding: 8px 12px; margin-bottom: 16px; }
+      pre { background: #f4f5f7; padding: 16px; border-radius: 8px; overflow: auto; }
+      .note { color: #44546f; margin-bottom: 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Forge Remote License Repro</h1>
+    <p class="note">This page calls a Forge resolver, which invokes a remote backend that decodes the FIT and returns the raw <code>app.license</code> payload.</p>
+    <button id="run">Inspect license payload</button>
+    <pre id="output">Click the button to inspect the remote FIT payload.</pre>
+    <script src="index.js"></script>
+  </body>
+</html>
